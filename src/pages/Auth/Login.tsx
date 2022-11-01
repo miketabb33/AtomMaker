@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Auth from "../../components/Auth/Auth";
 import { login } from "../../firebase/authentication";
-import styles from "./Login.module.scss";
+import styles from "./Auth.module.scss";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -17,9 +18,15 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.auth}>
-      <Auth title="Login" onSubmit={loginAction} error={error} />
-    </div>
+    <>
+      <div className={styles.auth}>
+        <Auth title="Login" onSubmit={loginAction} error={error} />
+      </div>
+      <div className={styles.options}>
+        <span>Dont have an account? </span>
+        <Link to="/signup">Sign Up</Link>
+      </div>
+    </>
   );
 };
 

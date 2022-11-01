@@ -7,7 +7,7 @@ type HeaderItemProps = {
   currentPath: string;
 };
 
-const HeaderItem = ({ link, label, currentPath }: HeaderItemProps) => {
+const HeaderLink = ({ link, label, currentPath }: HeaderItemProps) => {
   const itemStyles = () =>
     currentPath === link ? `${styles.item} ${styles.active}` : styles.item;
 
@@ -20,4 +20,4 @@ const HeaderItem = ({ link, label, currentPath }: HeaderItemProps) => {
   );
 };
 
-export default HeaderItem;
+export default HeaderLink;
