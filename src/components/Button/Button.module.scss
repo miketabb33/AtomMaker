@@ -1,0 +1,13 @@
+@import "../../styles/colors.scss";
+
+.button {
+  width: 100%;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  color: $black;
+  font-weight: 700;
+  background-color: $beige;
+}
