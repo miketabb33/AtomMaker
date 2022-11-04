@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { logout } from "../../firebase/authentication";
+import { logout } from "../../firebase/authentication/authentication";
 import styles from "./Header.module.scss";
 import HeaderAction from "./HeaderItem/HeaderAction";
 import HeaderLink from "./HeaderItem/HeaderLink";
@@ -7,6 +7,16 @@ import HeaderLogo from "./HeaderLogo/HeaderLogo";
 
 const Header = () => {
   const currentPath = useLocation().pathname;
+
+  const performLogout = () => {
+    logout()
+      .then((res) => {
+        console.log("Logged out");
+      })
+      .catch((err) => {
+        console.log("Log out error: ", err);
+      });
+  };
 
   return (
     <nav className={styles.header}>
@@ -20,18 +30,7 @@ const Header = () => {
             label="Sign Up"
             currentPath={currentPath}
           />
-          <HeaderAction
-            label="Logout"
-            onClick={() => {
-              logout()
-                .then((res) => {
-                  console.log(res);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
-          />
+          <HeaderAction label="Logout" onClick={performLogout} />
         </ul>
       </div>
     </nav>
