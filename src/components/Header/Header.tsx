@@ -12,13 +12,15 @@ const Header = () => {
   const user = useContext(UserContext);
 
   const performLogout = () => {
-    logout()
-      .then((res) => {
-        console.log("Logged out");
-      })
-      .catch((err) => {
-        console.log("Log out error: ", err);
-      });
+    if (window.confirm("Do you want to log out?")) {
+      logout()
+        .then((_) => {
+          console.log("Logged out");
+        })
+        .catch((err) => {
+          console.log("Log out error: ", err);
+        });
+    }
   };
 
   return (
