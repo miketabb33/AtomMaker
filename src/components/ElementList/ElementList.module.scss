@@ -1,0 +1,49 @@
+@import "../../styles/colors.scss";
+$heading-border: $primary solid 1px;
+$cell-Border: $primary solid 1px;
+
+.fixTableHead {
+  overflow-y: auto;
+  height: 600px;
+  box-shadow: 0 0 30px rgba($color: #000000, $alpha: 0.2);
+}
+
+.fixTableHead thead th {
+  position: sticky;
+  top: 0;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: $beige-light;
+}
+
+tr:nth-child(odd) {
+  background-color: $white;
+}
+
+th {
+  padding: 5px 20px;
+  background-color: $accent;
+  color: $secondary;
+  border-left: $heading-border;
+  border-top: $heading-border;
+  border-bottom: $heading-border;
+
+  &:last-child {
+    border-right: $heading-border;
+  }
+}
+
+td {
+  border-bottom: $cell-Border;
+  border-left: $cell-Border;
+
+  &:last-child {
+    border-right: $cell-Border;
+  }
+}

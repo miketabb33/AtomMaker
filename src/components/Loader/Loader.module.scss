@@ -1,0 +1,36 @@
+@import "../../styles/colors.scss";
+
+$ring-size: 10px;
+$size: 60px;
+$speed: 2s;
+
+.loader {
+  border: $ring-size solid #f3f3f3;
+  border-radius: 50%;
+  border-top: $ring-size solid $primary-strong;
+  border-right: $ring-size solid $beige;
+  border-bottom: $ring-size solid $primary-strong;
+  border-left: $ring-size solid $beige;
+  width: $size;
+  height: $size;
+  -webkit-animation: spin $speed linear infinite;
+  animation: spin $speed linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

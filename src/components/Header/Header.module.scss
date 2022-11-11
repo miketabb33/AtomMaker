@@ -1,9 +1,16 @@
 @import "../../styles/colors.scss";
 @import "../../styles/responsive.scss";
 
+$header-height: 64px;
+
+.spacer {
+  height: $header-height;
+  width: 100%;
+}
+
 .header {
   background-color: $primary;
-  height: 64px;
+  height: $header-height;
   width: 100%;
   position: fixed;
   top: 0;

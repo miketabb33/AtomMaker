@@ -24,29 +24,32 @@ const Header = () => {
   };
 
   return (
-    <nav className={styles.header}>
-      <div className={styles.content}>
-        <HeaderLogo />
-        <ul className={styles.items}>
-          <HeaderLink link="/" label="Home" currentPath={currentPath} />
-          {!user && (
-            <>
-              <HeaderLink
-                link="/login"
-                label="Login"
-                currentPath={currentPath}
-              />
-              <HeaderLink
-                link="/signup"
-                label="Sign Up"
-                currentPath={currentPath}
-              />
-            </>
-          )}
-          {user && <HeaderAction label="Logout" onClick={performLogout} />}
-        </ul>
-      </div>
-    </nav>
+    <>
+      <div className={styles.spacer}></div>
+      <nav className={styles.header}>
+        <div className={styles.content}>
+          <HeaderLogo />
+          <ul className={styles.items}>
+            <HeaderLink link="/" label="Home" currentPath={currentPath} />
+            {!user && (
+              <>
+                <HeaderLink
+                  link="/login"
+                  label="Login"
+                  currentPath={currentPath}
+                />
+                <HeaderLink
+                  link="/signup"
+                  label="Sign Up"
+                  currentPath={currentPath}
+                />
+              </>
+            )}
+            {user && <HeaderAction label="Logout" onClick={performLogout} />}
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 };
 
