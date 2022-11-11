@@ -1,5 +1,5 @@
 import { Element } from "../../types/Element";
-import ElementListItem from "../ElementListItem/ElementListItem";
+import ElementListItem from "./ElementListItem";
 import styles from "./ElementList.module.scss";
 
 type ElementListProps = {

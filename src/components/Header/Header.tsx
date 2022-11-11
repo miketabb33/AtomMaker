@@ -30,7 +30,6 @@ const Header = () => {
         <div className={styles.content}>
           <HeaderLogo />
           <ul className={styles.items}>
-            <HeaderLink link="/" label="Home" currentPath={currentPath} />
             {!user && (
               <>
                 <HeaderLink
@@ -45,7 +44,12 @@ const Header = () => {
                 />
               </>
             )}
-            {user && <HeaderAction label="Logout" onClick={performLogout} />}
+            {user && (
+              <>
+                <HeaderLink link="/" label="Home" currentPath={currentPath} />
+                <HeaderAction label="Logout" onClick={performLogout} />
+              </>
+            )}
           </ul>
         </div>
       </nav>
