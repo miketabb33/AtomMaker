@@ -3,9 +3,19 @@ $heading-border: $primary solid 1px;
 $cell-Border: $primary solid 1px;
 
 .fixTableHead {
-  overflow-y: auto;
+  overflow: scroll;
   height: 80vh;
   box-shadow: 0 0 30px rgba($color: #000000, $alpha: 0.2);
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .fixTableHead thead th {

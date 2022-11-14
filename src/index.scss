@@ -19,3 +19,8 @@ p {
   box-sizing: border-box;
   border: 0;
 }
+
+h1 {
+  text-shadow: 1px 1px 8px rgba($color: #000000, $alpha: 0.1);
+  color: $dark;
+}
