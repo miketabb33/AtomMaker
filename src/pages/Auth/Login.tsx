@@ -10,6 +10,7 @@ const Login = () => {
   const { redirectOnLogin } = useAppNavigate();
 
   const loginAction = (email: string, password: string) => {
+    setError("");
     login(email, password)
       .then((res) => {
         redirectOnLogin();

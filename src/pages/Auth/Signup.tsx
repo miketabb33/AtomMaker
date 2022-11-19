@@ -10,6 +10,7 @@ const SignUp = () => {
   const { redirectOnLogin } = useAppNavigate();
 
   const signupAction = (email: string, password: string) => {
+    setError("");
     signup(email, password)
       .then((res) => {
         redirectOnLogin();

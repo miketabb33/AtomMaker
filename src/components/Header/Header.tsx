@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
+import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import { logout } from "../../firebase/authentication/authentication";
 import styles from "./Header.module.scss";
 import HeaderAction from "./HeaderItem/HeaderAction";
@@ -9,7 +9,7 @@ import HeaderLogo from "./HeaderLogo/HeaderLogo";
 
 const Header = () => {
   const currentPath = useLocation().pathname;
-  const user = useContext(UserContext);
+  const authentication = useContext(AuthenticationContext);
 
   const performLogout = () => {
     if (window.confirm("Do you want to log out?")) {
@@ -30,7 +30,7 @@ const Header = () => {
         <div className={styles.content}>
           <HeaderLogo />
           <ul className={styles.items}>
-            {!user && (
+            {!authentication?.user && (
               <>
                 <HeaderLink
                   link="/login"
@@ -44,7 +44,7 @@ const Header = () => {
                 />
               </>
             )}
-            {user && (
+            {authentication?.user && (
               <>
                 <HeaderLink link="/" label="Home" currentPath={currentPath} />
                 <HeaderAction label="Logout" onClick={performLogout} />
