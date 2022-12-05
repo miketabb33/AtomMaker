@@ -1,8 +1,7 @@
-import StandardElementsSection from "../../components/StandardElementsSection/StandardElementsSection";
-import styles from "./Home.module.scss";
+import StandardElementsSection from '../../components/StandardElementsSection/StandardElementsSection'
 
 const Home = () => {
-  return <StandardElementsSection />;
-};
+  return <StandardElementsSection />
+}
 
-export default Home;
+export default Home

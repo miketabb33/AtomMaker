@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import useStandardElement from "../../hooks/useStandardElement";
-import ElementList from "../ElementList/ElementList";
-import Loader from "../Loader/Loader";
-import MoleculeMakerForm from "../MoleculeMakerForm/MoleculeMakerForm";
+import { useEffect } from 'react'
+import useStandardElement from '../../hooks/useStandardElement'
+import ElementList from '../ElementList/ElementList'
+import Loader from '../Loader/Loader'
+import MoleculeMakerForm from '../MoleculeMakerForm/MoleculeMakerForm'
 
-import styles from "./StandardElementsSection.module.scss";
+import styles from './StandardElementsSection.module.scss'
 
 const StandardElementsSection = () => {
   const {
@@ -13,12 +13,12 @@ const StandardElementsSection = () => {
     errorFetchingElements,
     isElementsEmpty,
     fetchElements,
-  } = useStandardElement();
+  } = useStandardElement()
 
   useEffect(() => {
-    fetchElements();
+    fetchElements()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <section>
@@ -33,7 +33,7 @@ const StandardElementsSection = () => {
         </>
       )}
     </section>
-  );
-};
+  )
+}
 
-export default StandardElementsSection;
+export default StandardElementsSection
