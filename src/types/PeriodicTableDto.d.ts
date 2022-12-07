@@ -1,4 +1,4 @@
-export type PeriodicTable = {
+export type PeriodicTableDto = {
   appearance: string | null
   name: string | null
   atomic_mass: number | null
