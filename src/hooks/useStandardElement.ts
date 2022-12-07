@@ -1,23 +1,22 @@
-import { useState } from "react";
-import { getAllElements } from "../networking/getAllElements";
-import { Element } from "../types/Element";
+import { useState } from 'react'
+import { getAllElements } from '../networking/getAllElements'
 
 const useStandardElement = () => {
-  const [elements, setElements] = useState<Element[]>([]);
-  const [isLoadingElements, setIsLoadingElements] = useState(false);
+  const [elements, setElements] = useState<[]>([])
+  const [isLoadingElements, setIsLoadingElements] = useState(false)
   const [errorFetchingElements, setErrorFetchingElements] =
-    useState<Error | null>(null);
+    useState<Error | null>(null)
 
-  const isElementsEmpty = elements.length === 0;
+  const isElementsEmpty = elements.length === 0
 
   const fetchElements = () => {
-    setIsLoadingElements(true);
-    setElements([]);
+    setIsLoadingElements(true)
+    setElements([])
     getAllElements()
-      .then((atoms) => setElements(atoms))
+      .then((response) => setElements([]))
       .catch((err) => setErrorFetchingElements(err))
-      .finally(() => setIsLoadingElements(false));
-  };
+      .finally(() => setIsLoadingElements(false))
+  }
 
   return {
     elements,
@@ -25,7 +24,7 @@ const useStandardElement = () => {
     errorFetchingElements,
     isElementsEmpty,
     fetchElements,
-  };
-};
+  }
+}
 
-export default useStandardElement;
+export default useStandardElement
