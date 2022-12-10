@@ -1,0 +1,32 @@
+@import '../../styles/colors.scss';
+
+.selector {
+  padding: 5px 8px;
+  display: flex;
+}
+
+.textField {
+  width: 100%;
+
+  font-size: inherit;
+
+  &,
+  &:focus {
+    border: 0;
+    outline-width: 0;
+  }
+}
+
+.button {
+  border: 0;
+  padding: 0 20px;
+  background-color: $beige;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chipWell {
+  display: flex;
+  gap: 5px;
+}

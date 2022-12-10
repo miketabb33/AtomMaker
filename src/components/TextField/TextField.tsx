@@ -1,23 +1,16 @@
-import styles from "./TextField.module.scss";
-
-type TextFieldProps = {
-  value: string;
-  type?: "email" | "number" | "password" | "text";
-  name?: string;
-  onChange?: (value: string) => void;
-  placeholder?: string;
-};
+import { TextFieldProps } from './textfieldProps'
+import style from './TextField.module.scss'
 
 const TextField = ({
   value,
-  type = "text",
+  type = 'text',
   name,
   onChange,
   placeholder,
 }: TextFieldProps) => {
   const valueChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) onChange(e.target.value);
-  };
+    if (onChange) onChange(e.target.value)
+  }
 
   return (
     <input
@@ -27,9 +20,9 @@ const TextField = ({
       placeholder={placeholder}
       required={true}
       name={name}
-      className={styles.textField}
+      className={`${style.textFieldShared} ${style.textField}`}
     />
-  );
-};
+  )
+}
 
-export default TextField;
+export default TextField

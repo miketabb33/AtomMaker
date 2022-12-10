@@ -1,5 +1,6 @@
 import TableRow from './TableRow'
 import styles from './Table.module.scss'
+import { prettyTitle } from '../../logic/prettyTitle'
 
 type TableProps = {
   items: any[]
@@ -12,7 +13,7 @@ const Table = ({ items }: TableProps) => {
         <thead>
           <tr>
             {Object.entries(items[0]).map(([k]) => (
-              <th key={k}>{k}</th>
+              <th key={k}>{prettyTitle(k)}</th>
             ))}
           </tr>
         </thead>
