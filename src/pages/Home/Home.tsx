@@ -5,13 +5,18 @@ import styles from './Home.module.scss'
 import MyMolecules from '../../components/MyMolecules/MyMolecules'
 import { getAllElements } from '../../DataStore/PeriodicTable'
 import { parseMoleculeMakerElements } from '../../logic/parseMoleculeMakerElements'
+import { addMoleculeToFirestore } from '../../firebase/firestore/molecule'
+import { useContext } from 'react'
+import { AuthenticationContext } from '../../contexts/AuthenticationContext'
 
 const Home = () => {
   const periodicTable = getAllElements()
   const moleculeMakerElements = parseMoleculeMakerElements(periodicTable)
+  const authentication = useContext(AuthenticationContext)
 
   const onFormSubmit = (molecule: Molecule) => {
-    console.log(molecule)
+    if (!authentication.user) return
+    addMoleculeToFirestore(molecule, authentication.user.uid)
   }
 
   return (
