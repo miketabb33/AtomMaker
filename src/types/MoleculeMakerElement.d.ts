@@ -1,4 +1,4 @@
 export type MoleculeMakerElement = {
-  atomicMass: number
+  atomicNumber: number
   name: string
 }

@@ -15,6 +15,7 @@ const DropDown = ({ items, onClick }: DropDownProps) => {
     <div className={styles.dropdown}>
       {items.map((item) => (
         <p
+          key={item.name}
           className={styles.item}
           onClick={() => {
             onClick(item)

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { makeId } from '../../logic/makeId'
+import { Molecule } from '../../types/Molecule'
 import { MoleculeMakerElement } from '../../types/MoleculeMakerElement'
 import Button from '../Button/Button'
 import { ChipData } from '../Chip/Chip'
@@ -11,9 +12,10 @@ import styles from './MoleculeMakerForm.module.scss'
 
 type MoleculeMakerFormProps = {
   elements: MoleculeMakerElement[]
+  onSubmit: (molecule: Molecule) => void
 }
 
-const MoleculeMakerForm = ({ elements }: MoleculeMakerFormProps) => {
+const MoleculeMakerForm = ({ elements, onSubmit }: MoleculeMakerFormProps) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [selectorText, setSelectorText] = useState('')
@@ -32,7 +34,7 @@ const MoleculeMakerForm = ({ elements }: MoleculeMakerFormProps) => {
     )
     return filteredElements.map((element) => {
       return {
-        id: `${element.atomicMass}`,
+        id: `${element.atomicNumber}`,
         name: element.name,
       }
     })
@@ -54,23 +56,48 @@ const MoleculeMakerForm = ({ elements }: MoleculeMakerFormProps) => {
     setSelectorText('')
   }
 
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const elementAtomicIds: number[] = chipsData.map((data) => {
+      for (const element of elements) {
+        if (data.name === element.name) {
+          return element.atomicNumber
+        }
+      }
+      return -1
+    })
+
+    const molecule: Molecule = {
+      name,
+      description,
+      elementAtomicIds,
+    }
+    onSubmit(molecule)
+  }
+
   return (
     <div className={styles.container}>
-      <TextField value={name} onChange={setName} placeholder="Name" />
-      <TextField
-        value={description}
-        onChange={setDescription}
-        placeholder="Description"
-      />
-      <Selector
-        textFieldProps={selectorTextFieldProps}
-        chipsData={chipsData}
-        onChipXClick={onChipXClick}
-      />
-      {dropDownResults.length > 0 && (
-        <DropDown items={dropDownResults} onClick={onDropDownItemClick} />
-      )}
-      <Button>Create Molecule</Button>
+      <form className={styles.form} onSubmit={onFormSubmit}>
+        <TextField value={name} onChange={setName} placeholder="Name" />
+        <div className={styles.spacer} />
+        <TextField
+          value={description}
+          onChange={setDescription}
+          placeholder="Description"
+        />
+        <div className={styles.spacer} />
+        <Selector
+          textFieldProps={selectorTextFieldProps}
+          chipsData={chipsData}
+          onChipXClick={onChipXClick}
+        />
+        {dropDownResults.length > 0 && (
+          <DropDown items={dropDownResults} onClick={onDropDownItemClick} />
+        )}
+        <div className={styles.spacer} />
+        <Button type="submit">Create Molecule</Button>
+      </form>
     </div>
   )
 }

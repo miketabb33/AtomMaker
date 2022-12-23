@@ -35,7 +35,7 @@ const Selector = ({
         value={value}
         onChange={valueChanged}
         placeholder={placeholder}
-        required={true}
+        required={false}
         name={name}
         className={selectorStyles.textField}
       />
