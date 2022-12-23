@@ -1,15 +1,19 @@
 import { TextFieldProps } from './textfieldProps'
 import textFieldStyles from './TextField.module.scss'
 import selectorStyles from './Selector.module.scss'
-import Chip, { ChipIdentity } from '../Chip/Chip'
+import Chip, { ChipData } from '../Chip/Chip'
 
 type SelectorProps = {
   textFieldProps: TextFieldProps
-  onButtonClick: () => void
-  chips: ChipIdentity[]
+  chipsData: ChipData[]
+  onChipXClick: (id: string) => void
 }
 
-const Selector = ({ textFieldProps, onButtonClick, chips }: SelectorProps) => {
+const Selector = ({
+  textFieldProps,
+  chipsData: chips,
+  onChipXClick,
+}: SelectorProps) => {
   const { type, value, onChange, placeholder, name } = textFieldProps
 
   const valueChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,12 +26,7 @@ const Selector = ({ textFieldProps, onButtonClick, chips }: SelectorProps) => {
     >
       <div className={selectorStyles.chipWell}>
         {chips.map((chip) => (
-          <Chip
-            identity={chip}
-            onClickClose={(id) => {
-              console.log(id)
-            }}
-          />
+          <Chip key={chip.id} chipData={chip} onClickClose={onChipXClick} />
         ))}
       </div>
 
@@ -40,14 +39,6 @@ const Selector = ({ textFieldProps, onButtonClick, chips }: SelectorProps) => {
         name={name}
         className={selectorStyles.textField}
       />
-      <button
-        className={selectorStyles.button}
-        onClick={() => {
-          onButtonClick()
-        }}
-      >
-        Add
-      </button>
     </div>
   )
 }

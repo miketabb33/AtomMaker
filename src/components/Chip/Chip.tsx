@@ -1,26 +1,26 @@
 import styles from './Chip.module.scss'
 import cross from '../../images/cross-sign.png'
 
-export type ChipIdentity = {
+export type ChipData = {
   id: string
   name: string
 }
 
 type ChipProps = {
-  identity: ChipIdentity
+  chipData: ChipData
   onClickClose: (id: string) => void
 }
 
-const Chip = ({ identity, onClickClose }: ChipProps) => {
+const Chip = ({ chipData: data, onClickClose }: ChipProps) => {
   return (
     <div className={styles.chip}>
       <div className={styles.container}>
-        <p className={styles.name}>{identity.name}</p>
+        <p className={styles.name}>{data.name}</p>
         <img
           className={styles.cross}
           src={cross}
-          onClick={() => onClickClose(identity.id)}
-          alt={'cross-image'}
+          onClick={() => onClickClose(data.id)}
+          alt={'cross'}
         />
       </div>
     </div>
