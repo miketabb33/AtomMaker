@@ -1,24 +1,14 @@
 import MoleculeMakerForm from '../../components/MoleculeMakerForm/MoleculeMakerForm'
 import Table from '../../components/Table/Table'
-import { PeriodicTableDto } from '../../types/PeriodicTableDto'
-import periodicTableJson from '../../periodicTable.json'
-import { parseElements } from '../../logic/parseElements'
-import { MoleculeMakerElement } from '../../types/MoleculeMakerElement'
 import { Molecule } from '../../types/Molecule'
 import styles from './Home.module.scss'
 import MyMolecules from '../../components/MyMolecules/MyMolecules'
+import { getAllElements } from '../../DataStore/PeriodicTable'
+import { parseMoleculeMakerElements } from '../../logic/parseMoleculeMakerElements'
 
 const Home = () => {
-  const periodicTableDto: PeriodicTableDto[] = periodicTableJson
-
-  const moleculeMakerElements: MoleculeMakerElement[] = periodicTableDto.map(
-    (item) => {
-      return {
-        atomicNumber: item.number || -1,
-        name: item.name || 'Invalid',
-      }
-    }
-  )
+  const periodicTable = getAllElements()
+  const moleculeMakerElements = parseMoleculeMakerElements(periodicTable)
 
   const onFormSubmit = (molecule: Molecule) => {
     console.log(molecule)
@@ -40,7 +30,7 @@ const Home = () => {
         </div>
       </div>
       <h1>Elements</h1>
-      <Table items={parseElements(periodicTableDto)} />
+      <Table items={periodicTable} />
     </>
   )
 }
