@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { addMoleculeToFirestore } from '../../firebase/firestore/molecule'
 import { makeId } from '../../logic/makeId'
 import { Molecule } from '../../types/Molecule'
 import { MoleculeMakerElement } from '../../types/MoleculeMakerElement'
@@ -12,10 +13,10 @@ import styles from './MoleculeMakerForm.module.scss'
 
 type MoleculeMakerFormProps = {
   elements: MoleculeMakerElement[]
-  onSubmit: (molecule: Molecule) => void
+  userId?: string
 }
 
-const MoleculeMakerForm = ({ elements, onSubmit }: MoleculeMakerFormProps) => {
+const MoleculeMakerForm = ({ elements, userId }: MoleculeMakerFormProps) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [selectorText, setSelectorText] = useState('')
@@ -56,10 +57,8 @@ const MoleculeMakerForm = ({ elements, onSubmit }: MoleculeMakerFormProps) => {
     setSelectorText('')
   }
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    const elementAtomicIds: number[] = chipsData.map((data) => {
+  const getAtomicNumberForChips = () => {
+    return chipsData.map((data) => {
       for (const element of elements) {
         if (data.name === element.name) {
           return element.atomicNumber
@@ -67,13 +66,33 @@ const MoleculeMakerForm = ({ elements, onSubmit }: MoleculeMakerFormProps) => {
       }
       return -1
     })
+  }
+
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!userId) return
+
+    const elementAtomicNumbers = getAtomicNumberForChips()
 
     const molecule: Molecule = {
       name,
       description,
-      elementAtomicIds,
+      elementAtomicIds: elementAtomicNumbers,
     }
-    onSubmit(molecule)
+    addMoleculeToFirestore(molecule, userId)
+      .then((_) => {
+        clearForm()
+      })
+      .catch((err) => {
+        alert(err)
+      })
+  }
+
+  const clearForm = () => {
+    setName('')
+    setDescription('')
+    setChipsData([])
+    setSelectorText('')
   }
 
   return (

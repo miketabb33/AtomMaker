@@ -1,11 +1,9 @@
 import MoleculeMakerForm from '../../components/MoleculeMakerForm/MoleculeMakerForm'
 import Table from '../../components/Table/Table'
-import { Molecule } from '../../types/Molecule'
 import styles from './Home.module.scss'
 import MyMolecules from '../../components/MyMolecules/MyMolecules'
 import { getAllElements } from '../../DataStore/PeriodicTable'
 import { parseMoleculeMakerElements } from '../../logic/parseMoleculeMakerElements'
-import { addMoleculeToFirestore } from '../../firebase/firestore/molecule'
 import { useContext } from 'react'
 import { AuthenticationContext } from '../../contexts/AuthenticationContext'
 
@@ -14,11 +12,6 @@ const Home = () => {
   const moleculeMakerElements = parseMoleculeMakerElements(periodicTable)
   const authentication = useContext(AuthenticationContext)
 
-  const onFormSubmit = (molecule: Molecule) => {
-    if (!authentication.user) return
-    addMoleculeToFirestore(molecule, authentication.user.uid)
-  }
-
   return (
     <>
       <div className={styles.column}>
@@ -26,12 +19,12 @@ const Home = () => {
           <h1>Make Molecule</h1>
           <MoleculeMakerForm
             elements={moleculeMakerElements}
-            onSubmit={onFormSubmit}
+            userId={authentication.user?.uid}
           />
         </div>
         <div>
           <h1>My Molecules</h1>
-          <MyMolecules />
+          <MyMolecules userId={authentication.user?.uid} />
         </div>
       </div>
       <h1>Elements</h1>
