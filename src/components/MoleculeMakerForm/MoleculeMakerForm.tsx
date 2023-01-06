@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { addMoleculeToFirestore } from '../../firebase/firestore/molecule'
 import { makeId } from '../../logic/makeId'
 import { Molecule } from '../../types/Molecule'
@@ -21,6 +21,12 @@ const MoleculeMakerForm = ({ elements, userId }: MoleculeMakerFormProps) => {
   const [description, setDescription] = useState('')
   const [selectorText, setSelectorText] = useState('')
   const [chipsData, setChipsData] = useState<ChipData[]>([])
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusInput = () => {
+    inputRef.current?.focus()
+  }
 
   const selectorTextFieldProps: TextFieldProps = {
     value: selectorText,
@@ -55,6 +61,7 @@ const MoleculeMakerForm = ({ elements, userId }: MoleculeMakerFormProps) => {
     }
     setChipsData([...chipsData, chipData])
     setSelectorText('')
+    focusInput()
   }
 
   const getAtomicNumberForChips = () => {
@@ -110,6 +117,7 @@ const MoleculeMakerForm = ({ elements, userId }: MoleculeMakerFormProps) => {
           textFieldProps={selectorTextFieldProps}
           chipsData={chipsData}
           onChipXClick={onChipXClick}
+          inputRef={inputRef}
         />
         {dropDownResults.length > 0 && (
           <DropDown items={dropDownResults} onClick={onDropDownItemClick} />

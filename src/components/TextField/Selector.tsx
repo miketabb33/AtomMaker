@@ -7,12 +7,14 @@ type SelectorProps = {
   textFieldProps: TextFieldProps
   chipsData: ChipData[]
   onChipXClick: (id: string) => void
+  inputRef?: React.RefObject<HTMLInputElement>
 }
 
 const Selector = ({
   textFieldProps,
   chipsData: chips,
   onChipXClick,
+  inputRef,
 }: SelectorProps) => {
   const { type, value, onChange, placeholder, name } = textFieldProps
 
@@ -38,6 +40,7 @@ const Selector = ({
         required={false}
         name={name}
         className={selectorStyles.textField}
+        ref={inputRef}
       />
     </div>
   )

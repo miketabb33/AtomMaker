@@ -1,10 +1,11 @@
+import { Unsubscribe } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { watchMolecules } from '../../firebase/firestore/molecule'
 import { Molecule } from '../../types/Molecule'
 import styles from '../Table/Table.module.scss'
 import ElementShorthand from './ElementShorthand'
 
-let unsub
+let unsub: Unsubscribe
 
 type MyMoleculesProps = {
   userId?: string

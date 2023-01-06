@@ -29,7 +29,7 @@ export const watchMolecules = ({
   onError,
 }: WatchMolecules) => {
   const q = query(moleculesCollection, where('authorId', '==', `${userId}`))
-  onSnapshot(
+  return onSnapshot(
     q,
     (snapshot) => {
       const molecules: Molecule[] = snapshot.docs.map((doc) => {
